@@ -68,7 +68,7 @@ class FlyingState:
 		pass
 		
 	func exit():
-		bird.set_gravity_scale(prev_gravity_scale)
+		self.bird.set_gravity_scale(self.prev_gravity_scale)
 		pass
 		
 # ----- FlappingState
@@ -82,18 +82,18 @@ class FlappingState:
 		pass
 		
 	func update(delta):
-		if rad2deg(bird.get_rot()) > 30:
-			bird.set_rot(deg2rad(30))
-			bird.set_angular_velocity(0)
+		if rad2deg(self.bird.get_rot()) > 30:
+			self.bird.set_rot(deg2rad(30))
+			self.bird.set_angular_velocity(0)
 			
-		if bird.get_linear_velocity().y > 0:
-			bird.set_angular_velocity(1.5)
+		if self.bird.get_linear_velocity().y > 0:
+			self.bird.set_angular_velocity(1.5)
 		pass
 		
 	func flap():
-		bird.set_linear_velocity(Vector2(bird.speed, get_linear_velocity().x, -150))
-		bird.set_angular_velocity(-3)
-		bird.get_node("anim").play("flap")
+		self.bird.set_linear_velocity(Vector2(self.bird.get_linear_velocity().x, -150))
+		self.bird.set_angular_velocity(-3)
+		self.bird.get_node("anim").play("flap")
 		pass
 		
 	func input(event):
