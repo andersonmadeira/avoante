@@ -9,9 +9,13 @@ const STATE_FLAPPING = 1
 const STATE_HIT      = 2
 const STATE_GROUNDED = 3
 
+signal state_changed
+
 func _ready():
 	set_process_input(true)
 	set_fixed_process(true)
+	
+	connect("body_enter", self, "on_body_enter")
 	pass
 	
 func _fixed_process(delta):
@@ -20,6 +24,11 @@ func _fixed_process(delta):
 	
 func _input(event):
 	state.input(event)
+	pass
+	
+func on_body_enter(other_body):
+	if state.has_method("on_body_enter"):
+		state.on_body_enter(other_body)
 	pass
 	
 func set_state(new_state):
@@ -33,6 +42,8 @@ func set_state(new_state):
 		state = HitState.new(self)
 	elif new_state == STATE_GROUNDED:
 		state = GroundedState.new(self)
+		
+	emit_signal("state_changed", self)
 	pass
 	
 func get_state():
@@ -69,6 +80,8 @@ class FlyingState:
 		
 	func exit():
 		self.bird.set_gravity_scale(self.prev_gravity_scale)
+		self.bird.get_node("anim").stop()
+		self.bird.get_node("anim_sprite").set_pos(Vector2(0,0))
 		pass
 		
 # ----- FlappingState
@@ -79,6 +92,7 @@ class FlappingState:
 	func _init(bird):
 		self.bird = bird
 		bird.set_linear_velocity(Vector2(bird.speed, bird.get_linear_velocity().y))
+		flap()
 		pass
 		
 	func update(delta):
@@ -101,6 +115,13 @@ class FlappingState:
 			flap()
 		pass
 		
+	func on_body_enter(other_body):
+		if other_body.is_in_group(game.GROUP_PIPES):
+			bird.set_state(bird.STATE_HIT)
+		elif other_body.is_in_group(game.GROUP_GROUNDS):
+			bird.set_state(bird.STATE_GROUNDED)
+		pass
+		
 	func exit():
 		pass
 		
@@ -111,12 +132,22 @@ class HitState:
 	
 	func _init(bird):
 		self.bird = bird
+		bird.set_linear_velocity(Vector2(0,0))
+		bird.set_angular_velocity(2)
+		
+		var other_body = bird.get_colliding_bodies()[0]
+		bird.add_collision_exception_with(other_body)
 		pass
 		
 	func update(delta):
 		pass
 		
 	func input(event):
+		pass
+		
+	func on_body_enter(other_body):
+		if other_body.is_in_group(game.GROUP_GROUNDS):
+			bird.set_state(bird.STATE_GROUNDED)
 		pass
 		
 	func exit():
@@ -129,6 +160,8 @@ class GroundedState:
 	
 	func _init(bird):
 		self.bird = bird
+		bird.set_linear_velocity(Vector2(0,0))
+		bird.set_angular_velocity(0)
 		pass
 		
 	func update(delta):
