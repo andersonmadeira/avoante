@@ -63,4 +63,6 @@ transform/pos = Vector2( 13, 0 )
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
 
+transform/pos = Vector2( 0, -3.8147e-06 )
+
 
