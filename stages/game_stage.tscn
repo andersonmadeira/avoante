@@ -213,7 +213,7 @@ func _ready():
 	hide()
 	var hbox_score_last = utils.get_main_node().find_node(\"hbox_score_last\")
 	if hbox_score_last:
-		hbox_score_last.connect(\"counting finished\", self, \"show_medal\") 
+		hbox_score_last.connect(\"counting_finished\", self, \"show_medal\") 
 	pass
 
 func show_medal():
@@ -227,6 +227,8 @@ func show_medal():
 	if texture != null:
 		set_texture(texture)
 		show()
+	else:
+		print(\"null\")
 		
 	pass"
 

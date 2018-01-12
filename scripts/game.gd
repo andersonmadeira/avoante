@@ -4,10 +4,10 @@ const GROUP_PIPES = "pipes"
 const GROUP_GROUNDS = "grounds"
 const GROUP_BIRDS = "birds"
 
-const METAL_BRONZE   = 10
-const METAL_SILVER   = 20
-const METAL_GOLD     = 30
-const METAL_PLATINUM = 40
+const MEDAL_BRONZE   = 1
+const MEDAL_SILVER   = 2
+const MEDAL_GOLD     = 3
+const MEDAL_PLATINUM = 4
 
 var score_current = 0 setget _set_score_current
 var score_best = 0 setget _set_score_best
