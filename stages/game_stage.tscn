@@ -219,10 +219,10 @@ func _ready():
 func show_medal():
 	var texture = null 
 	
-	if game.score_current >= game.MEDAL_BRONZE: texture = spr_modal_bronze
-	if game.score_current >= game.MEDAL_SILVER: texture = spr_modal_silver
-	if game.score_current >= game.MEDAL_GOLD: texture = spr_modal_gold
-	if game.score_current >= game.MEDAL_PLATINUM: texture = spr_modal_platinum
+	if game.score_current >= game.MEDAL_BRONZE: texture = spr_medal_bronze
+	if game.score_current >= game.MEDAL_SILVER: texture = spr_medal_silver
+	if game.score_current >= game.MEDAL_GOLD: texture = spr_medal_gold
+	if game.score_current >= game.MEDAL_PLATINUM: texture = spr_medal_platinum
 	
 	if texture != null:
 		set_texture(texture)
