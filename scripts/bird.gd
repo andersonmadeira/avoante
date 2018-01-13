@@ -13,6 +13,7 @@ signal state_changed
 
 func _ready():
 	set_process_input(true)
+	set_process_unhandled_input(true)
 	set_fixed_process(true)
 	
 	add_to_group(game.GROUP_BIRDS)
@@ -25,6 +26,11 @@ func _fixed_process(delta):
 	
 func _input(event):
 	state.input(event)
+	pass
+	
+func _unhandled_input(event):
+	if state.has_method("unhandled_input"):
+		state.unhandled_input(event)
 	pass
 	
 func on_body_enter(other_body):
@@ -113,6 +119,14 @@ class FlappingState:
 		
 	func input(event):
 		if event.is_action_pressed("flap"):
+			flap()
+		pass
+		
+	func unhandled_input(event):
+		if event.type != InputEvent.MOUSE_BUTTON or !event.is_pressed() or event.is_echo():
+			return
+			
+		if event.button_index == BUTTON_LEFT:
 			flap()
 		pass
 		
