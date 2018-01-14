@@ -18,6 +18,7 @@ func change_stage(stage_path):
 	
 	# fade to black
 	get_node("anim").play("fade_in")
+	audio_player.play("sfx_swooshing")
 	yield(get_node("anim"), "finished")
 	
 	# change stage
