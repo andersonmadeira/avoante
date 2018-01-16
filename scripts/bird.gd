@@ -20,7 +20,9 @@ func _ready():
 	
 	add_to_group(game.GROUP_BIRDS)
 	connect("body_enter", self, "on_body_enter")
-	pass
+	
+	# random bird sprite
+	get_node("anim_sprite").set_sprite_frames(randomizer.get_bird_frame())
 	
 func _fixed_process(delta):
 	state.update(delta)
