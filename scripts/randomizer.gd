@@ -11,19 +11,20 @@ const BACKGROUND_NIGHT = 1
 var active
 
 func _ready():
-	self.generate_random_background()
+	randomize()
+	self._generate_background()
 	pass
 	
-func get_sprite():
+func get_background():
 	return backgrounds[active]
-	
-func generate_random_background():
-	randomize()
-	
+
+func _generate_background():
+	# Generate random background
 	var rand_f = randf()
-	if rand_f <= 0.2:
+	if rand_f <= 0.5:
 		active = BACKGROUND_NIGHT
 	else:
 		active = BACKGROUND_DAY
+	pass
 	
 

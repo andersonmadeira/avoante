@@ -3,5 +3,5 @@ extends CanvasLayer
 func _ready():
 	var sprite = get_node("sprite")
 	if sprite:
-		sprite.set_texture(background_generator.get_sprite())	
+		sprite.set_texture(randomizer.get_background())
 	pass
