@@ -22,7 +22,7 @@ func _ready():
 	connect("body_enter", self, "on_body_enter")
 	
 	# random bird sprite
-	get_node("anim_sprite").set_sprite_frames(randomizer.get_bird_frame())
+	#get_node("anim_sprite").set_sprite_frames(randomizer.get_bird_frame())
 	
 func _fixed_process(delta):
 	state.update(delta)
