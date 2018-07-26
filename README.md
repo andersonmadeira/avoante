@@ -1,6 +1,6 @@
 # Avoante
 
-Avoante is FlappyBird game clone built in Godot.
+Avoante is a FlappyBird game clone built in Godot.
 
 ### Screenshots
 
@@ -13,3 +13,7 @@ Just open in Godot and build/run
 #### Contributions
 
 Feel free to send pull requests, comments or suggestions
+
+#### Compatibilty
+
+Tested in Godot 2.x
